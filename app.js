@@ -1,31 +1,39 @@
-const express = require('express')
-const database = require("./database.js")
+const express = require('express');
+const database = require('./database.js');
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
-app.use(express.static("public"))
-app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
-app.post("/api/login", function (req, res){
-    let hasAuthenticatedUser = false;
+const generateSessionToken = (username) => {
+    const timestamp = Date.now();
+    return `${username}_${timestamp}`;
+};
 
-    for (let i =0; i < database.users.length; i++){
+app.post('/api/login', (req, res) => {
+    let isAuthenticated = false;
+
+    for (let i = 0; i < database.users.length; i++) {
         const userToCheck = database.users[i];
 
-        if (userToCheck.username === req.body.username && userToCheck.password === req.body.password){
-            res.send("Authenticated")
-            hasAuthenticatedUser = true;
-            break;
+        if (userToCheck.username === req.body.username && userToCheck.password === req.body.password) {
+            const sessionToken = generateSessionToken(userToCheck.username);
+
+            return res.status(200).json({
+                message: 'You have been authenticated',
+                token: sessionToken,
+            });
         }
     }
 
-    if (hasAuthenticatedUser === false){
-        res.send("Unauthenticated")
-    }
+    res.status(401).json({
+        error: "You are unauthenticated due to wrong username or password",
+    });
+});
 
-})
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+});
 
-app.listen(port, function (){
-    console.log(`Example app listening on port ${port}`)
-})
