@@ -1,9 +1,16 @@
 const users = [{
     username: "Mithat",
-    password: "1234"
+    password: "1234",
+    city: "Berlin"
 },{
     username: "Ema",
-    password: "abcd"
+    password: "abcd",
+    city: "London"
 }]
 
-module.exports = {users}
+const getUserCity = (username) => {
+    const user = users.find((user) => user.username === username);
+    return user ? user.city : null;
+};
+
+module.exports = {users, getUserCity}

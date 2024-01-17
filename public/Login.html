@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="/login-page-scripts/password-toggle.js" defer></script>
     <title>Server</title>
 </head>
 <body>
@@ -12,8 +13,11 @@
     <form action="api/login" method="post" class="log-in-form">
         <label for="1name">Name:</label>
         <input type="text" id="1name" name="username">
-        <label for="2name">Password:</label>
-        <input type="password" id="2name" name="password">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <button type="button" id="password-toggle" onclick="togglePassword()">
+            Show password
+        </button>
         <input type="submit" value="Log in">
     </form>
 

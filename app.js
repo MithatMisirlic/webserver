@@ -12,12 +12,12 @@ const generateSessionToken = (username) => {
     return `${username}_${timestamp}`;
 };
 
-app.get('/home', (req, res) => {
-    res.sendFile(__dirname + '/public/landing-page.html');
-});
-
 app.get('/', (req, res) => {
     res.redirect('/home');
+});
+
+app.get('/home', (req, res) => {
+    res.sendFile(__dirname + '/public/landing-page.html');
 });
 
 app.post('/api/login', (req, res) => {
@@ -29,16 +29,24 @@ app.post('/api/login', (req, res) => {
         if (userToCheck.username === req.body.username && userToCheck.password === req.body.password) {
             const sessionToken = generateSessionToken(userToCheck.username);
 
-            return res.status(200).json({
-                message: 'You have been authenticated',
-                token: sessionToken,
-            });
+            return res.status(200).send(sessionToken);
         }
     }
 
-    res.status(401).json({
-        error: 'You are unauthenticated due to wrong username or password',
-    });
+    res.status(401).send("unauthenticated");
+});
+
+app.get('/api/:username/city', (req, res) => {
+    const username = req.params.username;
+    const city = database.getUserCity(username);
+
+    if (city) {
+        res.status(200).send(city);
+    } else {
+        res.status(404).json({
+            error: 'City not found for the given username',
+        });
+    }
 });
 
 app.listen(port, () => {
