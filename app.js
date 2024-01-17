@@ -12,6 +12,14 @@ const generateSessionToken = (username) => {
     return `${username}_${timestamp}`;
 };
 
+app.get('/home', (req, res) => {
+    res.sendFile(__dirname + '/public/landing-page.html');
+});
+
+app.get('/', (req, res) => {
+    res.redirect('/home');
+});
+
 app.post('/api/login', (req, res) => {
     let isAuthenticated = false;
 
@@ -29,11 +37,10 @@ app.post('/api/login', (req, res) => {
     }
 
     res.status(401).json({
-        error: "You are unauthenticated due to wrong username or password",
+        error: 'You are unauthenticated due to wrong username or password',
     });
 });
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
-
