@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style2.css">
+    <script src="/dashboard-page-scripts/updateCurrentWeatherInformation.js" defer></script>
     <title>Server</title>
 </head>
 <body>
@@ -12,5 +13,9 @@
     <img src="/profile-pictures/pfp.png" alt="there should be a profile picture here">
 
     <button>Log out</button>
+
+    <button onclick="updateCurrentWeatherInformation()">Get Current Temperature</button>
+
+    <div id="temperature"></div>
 </body>
 </html>

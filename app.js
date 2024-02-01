@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser')
 const database = require('./database.js');
 
 const app = express();
@@ -6,6 +7,7 @@ const port = 3000;
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 const generateSessionToken = (username) => {
     const timestamp = Date.now();
@@ -21,7 +23,13 @@ app.get('/home', (req, res) => {
 });
 
 app.get('/dashboard', (req, res) => {
-    res.sendFile(__dirname + '/public/dashboard.html');
+    const sessionToken = req.cookies.sessionToken;
+
+    if (sessionToken) {
+        res.sendFile(__dirname + '/public/dashboard.html');
+    } else {
+        res.redirect('/home');
+    }
 });
 
 app.post('/api/login', (req, res) => {

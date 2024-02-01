@@ -20,6 +20,11 @@ async function authenticateUser(event) {
 
         const data = await response.json();
         console.log("Server Response:", data);
+
+        const sessionToken = await response.text();
+        document.cookie = 'sessionToken=&{sessionToken}';
+        window.location.href = '/dashboard';
+
     } catch (error) {
         console.error("Error:", error);
     }
