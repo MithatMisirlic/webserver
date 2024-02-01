@@ -20,6 +20,10 @@ app.get('/home', (req, res) => {
     res.sendFile(__dirname + '/public/landing-page.html');
 });
 
+app.get('/dashboard', (req, res) => {
+    res.sendFile(__dirname + '/public/dashboard.html');
+});
+
 app.post('/api/login', (req, res) => {
     let isAuthenticated = false;
 
@@ -28,12 +32,13 @@ app.post('/api/login', (req, res) => {
 
         if (userToCheck.username === req.body.username && userToCheck.password === req.body.password) {
             const sessionToken = generateSessionToken(userToCheck.username);
-
+            isAuthenticated = true;
             return res.status(200).send(sessionToken);
         }
     }
-
-    res.status(401).send("unauthenticated");
+        if (isAuthenticated === false){
+            res.status(401).send("unauthenticated");
+        }
 });
 
 app.get('/api/:username/city', (req, res) => {
@@ -45,6 +50,21 @@ app.get('/api/:username/city', (req, res) => {
     } else {
         res.status(404).json({
             error: 'City not found for the given username',
+        });
+    }
+});
+
+app.get('/api/:username/profile-picture-url', (req, res) => {
+    const username = req.params.username;
+    const user = database.users.find((user) => user.username === username);
+
+    if (user) {
+        res.status(200).json({
+            profilePictureUrl: user.profilePicturePath,
+        });
+    } else {
+        res.status(404).json({
+            error: 'User not found',
         });
     }
 });

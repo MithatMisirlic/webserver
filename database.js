@@ -1,11 +1,13 @@
 const users = [{
     username: "Mithat",
     password: "1234",
-    city: "Berlin"
+    city: "Berlin",
+    profilePicturePath:"/profile-pictures/pfp.png"
 },{
     username: "Ema",
     password: "abcd",
-    city: "London"
+    city: "London",
+    profilePicturePath:"/profile-pictures/pfp.png"
 }]
 
 const getUserCity = (username) => {

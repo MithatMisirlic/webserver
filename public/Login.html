@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="/login-page-scripts/password-toggle.js" defer></script>
+    <script src="/login-page-scripts/authentication.js" defer></script>
     <title>Server</title>
 </head>
 <body>
 <h1>Welcome page</h1>
 <p>now type in your name and password</p>
-    <form action="api/login" method="post" class="log-in-form">
-        <label for="1name">Name:</label>
-        <input type="text" id="1name" name="username">
+    <form class="log-in-form">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="username">
+
         <label for="password">Password:</label>
         <input type="password" id="password" name="password">
+
         <button type="button" id="password-toggle" onclick="togglePassword()">
             Show password
         </button>
-        <input type="submit" value="Log in">
+
+        <input type="submit" id="log_in" value="Log in" onclick="authenticateUser(event)">
     </form>
 
 </body>
