@@ -32,6 +32,17 @@ app.get('/dashboard', (req, res) => {
     }
 });
 
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    if (username === 'correct_username' && password === 'correct_password') {
+        res.status(200).json({ message: 'Login successful' });
+    } else {
+        res.status(401).json({ message: 'Incorrect username or password' });
+    }
+});
+
+
 app.post('/api/login', (req, res) => {
     let isAuthenticated = false;
 

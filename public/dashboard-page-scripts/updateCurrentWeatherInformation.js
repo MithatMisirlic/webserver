@@ -22,6 +22,25 @@ async function updateCurrentWeatherInformation() {
 
             const temperatureElement = document.getElementById('temperature');
             temperatureElement.textContent = `Current Temperature: ${temperature} °C`;
+
+            const weather_img = document.getElementById("weather-img")
+            switch (weatherData.weather[0].main) {
+                case "Clouds":
+                    weather_img.innerHTML="<img src='/weather-pictures/cloudy.png'>"
+                    break
+                case "Rainy":
+                    weather_img.innerHTML="<img src='/weather-pictures/Rainy.png'>"
+                    break
+                case "Snowy":
+                    weather_img.innerHTML="<img src='/weather-pictures/Snowy.png'>"
+                    break
+                case "Thunderstorm":
+                    weather_img.innerHTML="<img src='/weather-pictures/Thunderstorm.png'>"
+                    break
+                case "Clear":
+                    weather_img.innerHTML="<img src='/weather-pictures/Clear.png'>"
+                    break
+            }
         } catch (error) {
             console.error('Error fetching current weather:', error);
         }

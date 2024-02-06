@@ -9,8 +9,11 @@
     <title>Server</title>
 </head>
 <body>
+
 <h1>Welcome page</h1>
+
 <p>now type in your name and password</p>
+
     <form class="log-in-form">
         <label for="username">Name:</label>
         <input type="text" id="username" name="username">
@@ -24,6 +27,8 @@
 
         <input type="submit" id="log_in" value="Log in" onclick="authenticateUser(event)">
     </form>
+
+    <div id="error-message" style="color: red;"></div>
 
 </body>
 </html>
