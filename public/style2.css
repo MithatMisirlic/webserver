@@ -23,3 +23,16 @@ button {
     cursor: pointer;
     margin-top: 20px;
 }
+
+#forecastContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.forecast-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 10px;
+}

@@ -5,19 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style2.css">
     <script src="/dashboard-page-scripts/updateCurrentWeatherInformation.js" defer></script>
+    <script src="/dashboard-page-scripts/Logout.js" defer></script>
+    <script src="/dashboard-page-scripts/updateUserData.js" defer></script>
+    <script src="/dashboard-page-scripts/searchCity.js" defer></script>
+    <script src="/dashboard-page-scripts/updateForecast.js" defer></script>
     <title>Server</title>
 </head>
-<body>
-    <h1>Mithat's dashboard</h1>
+<body onload="updateUserData();">
+<h1 id="dashboard-heading"></h1>
 
-    <img src="/profile-pictures/pfp.png" alt="there should be a profile picture here">
+<div id="username_display"></div>
+<img id="profile" src="/profile-pictures/pfp.png" alt="Profile Picture">
 
-    <button>Log out</button>
+<input type="text" id="searchInput" placeholder="Enter city name">
+<button id="searchButton">Search</button>
 
-    <button onclick="updateCurrentWeatherInformation()">Get Current Temperature</button>
+<div id="searchResults"></div>
 
-    <div id="temperature"></div>
+<button onclick="logOut()">Log out</button>
 
-    <div id="weather-img"></div>
+<button onclick="updateCurrentWeatherInformation(); updateForecast()">Get Current Temperature</button>
+
+<div id="forecastContainer"></div>
+
+<div id="temperature"></div>
+
+<div id="weather-img"></div>
 </body>
 </html>

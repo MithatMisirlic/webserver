@@ -18,8 +18,10 @@ async function authenticateUser(event) {
             errorMessageContainer.textContent = 'Incorrect username or password';
             return;
         }
+
         const sessionToken = await response.text();
         document.cookie = 'sessionToken=' + sessionToken;
+        sessionStorage.setItem("username", username)
         window.location.href = '/dashboard';
 
     } catch (error) {

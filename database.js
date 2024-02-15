@@ -7,7 +7,7 @@ const users = [{
     username: "Ema",
     password: "abcd",
     city: "London",
-    profilePicturePath:"/profile-pictures/pfp.png"
+    profilePicturePath:"/profile-pictures/ema_pfp.jpg"
 }]
 
 const getUserCity = (username) => {
